@@ -7,15 +7,30 @@ function database = voters(database, varargin)
         else
             existing = size(database,2);
         end
+        % if return temp for bad input
+        temp = database;
         for ii = 1:nargin-1
+            % even indices = 
             if mod(ii,2)==0
-                database(ii/2+existing).ID = varargin{ii};
+                % if the ID is 'char' or 'string' then exit
+                if (ischar(varargin{ii}) || isstring(varargin{ii}) || ...
+                        varargin{ii}~=fix(varargin{ii}) || varargin{ii} < 0)
+                    database=temp;
+                    return
+                % else record the ID
+                else
+                    database(ii/2+existing).ID = varargin{ii};
+                end
             else
-                database((ii-1)/2+1+existing).Name = varargin{ii};
+                % if the ID is not 'char' or 'string' then exit
+                if ~ischar(varargin{ii}) && ~isstring(varargin{ii})
+                    database=temp;
+                    return
+                % else record the Name
+                else
+                    database((ii-1)/2+1+existing).Name = string(varargin{ii});
+                end
             end
         end
-    % invalid input return original db
-    else
-        database = database;
     end
 end

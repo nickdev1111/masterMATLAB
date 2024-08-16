@@ -7,15 +7,20 @@ function database = voters(database, varargin)
         else
             existing = size(database,2);
         end
+        % if return temp for bad input
+        temp = database;
         for ii = 1:nargin-1
             if mod(ii,2)==0
-                database(ii/2+existing).ID = varargin{ii};
+                if ~isinteger(varargin{ii})
+                    database=temp;
+                    return
+                else
+                    database(ii/2+existing).ID = varargin{ii};
+                end
             else
-                database((ii-1)/2+1+existing).Name = varargin{ii};
+                if ~ischar(varargin{ii}) && ~isstr
+                database((ii-1)/2+1+existing).Name = string(varargin{ii});
             end
         end
-    % invalid input return original db
-    else
-        database = db;
     end
 end
