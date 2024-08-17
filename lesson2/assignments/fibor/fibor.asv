@@ -1,8 +1,0 @@
-function out = fibor(n)
-    if n==2
-        out = [1 1];
-    else
-        temp[fibor(n-1) sum(fibor(n-1))]
-        out = [fibor(n-1) sum(fibor(n-1))];
-    end
-end
