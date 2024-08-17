@@ -1,8 +1,0 @@
-function p = palindrome(v)
-    if length(v)==2
-        p = v(1)==v(end);
-    else
-        if 
-        p = sum(v(1)==v(end) * palindrome(v(2:end-1)));
-    end
-end
